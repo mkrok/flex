@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset='utf-8' />
+        <link rel='stylesheet' href='styles.css' />
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="header">
+                <input type='text' name='todoItem' id='todoInput' placeholder='Enter todo item..' />
+                <button id='submitButton'>Add</button>
+            </div>
+            <div class="main">
+                <div id='todoList'></div>
+            </div>
+        </div>
+        <script>
+            function get () {
+                let todos = [];
+                let todos_str = localStorage.getItem('todo');
+                if (todos_str !== null) {
+                    todos = JSON.parse(todos_str);
+                }
+                return todos;
+            }
+
+            function show (todos) {
+                document.getElementById('todoList').innerHTML = '';
+                for ( let i=0; i < todos.length; i++) {
+                    document.getElementById('todoList').innerHTML += '<div onclick="remove(getAttribute(\'id\'))" class="todos" id="' +
+                        i + '">' + todos[i] + '<div>';
+                }
+            }
+
+            function remove (id) {
+                let todos = get ();
+                if (todos) {
+                    todos.splice(id, 1);
+                }
+
+                localStorage.setItem('todo', JSON.stringify(todos));
+                show (todos);
+            }
+
+            window.onload = function () {
+                let todos = get ();
+                show (todos);
+            }
+
+            document.getElementById('submitButton').addEventListener('click', function () {
+                let task = document.getElementById('todoInput').value;
+                document.getElementById('todoInput').value = '';
+                let todos = get ();
+                todos.push(task);
+                localStorage.setItem('todo', JSON.stringify(todos));
+                show (todos);
+            });
+
+        </script>
+    </body>
+</html>

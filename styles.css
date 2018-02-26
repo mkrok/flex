@@ -1,0 +1,28 @@
+.wrapper {
+  margin: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-content: center;
+  align-items: stretch;
+  height: 800px;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.header {
+  flex: 1;
+  align-self: auto;
+  min-width: 0;
+  min-height: auto;
+  display: flex;            /* NEW */
+  align-items: center;      /* NEW */
+  padding-left: 10px;
+  background-color: grey;
+}
+
+.main {
+  flex: 10;
+  background-color: #ccc;
+  padding: 10px;
+}
